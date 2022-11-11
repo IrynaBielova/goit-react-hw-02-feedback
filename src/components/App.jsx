@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { FeedbackOptions } from './FeedbackOptions'
 import { Statistics } from './Statistics';
 import { Notification } from './Notification';
+import {Section} from './Section';
+import styles from '../styles/styles.module.css';
 
 
 export class App extends Component {
@@ -30,46 +32,31 @@ export class App extends Component {
   render() {
     const { good, neutral, bad } = this.state;
     const total = good + neutral + bad;
-    const positiveFeedback = this.countPositiveFeedback();
+    // const percent = this.countPositiveFeedback();
     
     return(
-      <div
-      style={{
-        width: "320px",
-        margin: "7px",
-        marginRight: "auto",
-        marginLeft: "auto",
-        textAlign: "center",
-        paddingTop: "6px",
-        paddingBottom: "6px",
-        cursor: "pointer",
-        border: "none",
-        borderRadius: "4px",
-        boxShadow: "0px 0px 5px 2px rgba(174,183,227,1)",
-    }}>     
-        <h2
-        style={{color: "rgba(174,183,227,1)",
-      }}>Please leave feedback</h2>
-
+      <div>
+        <Section title="Please leave feedback">
         <FeedbackOptions 
             options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
           />
+          </Section>
 
-        <h2
-        style={{color: "rgba(174,183,227,1)",
-      }}>Statistics</h2>
-
+          <Section title="Statistics">
             {!total 
             ? (<Notification message={`There is no feedback`} />)
-            : (<>
-                <Statistics text={`Good:`} value={good} />
-                <Statistics text={`Neutral:`} value={neutral} />
-                <Statistics text={`Bad:`} value={bad} />
-                <Statistics text={`Total:`} value={total} />
-                <Statistics text={`Positive feedback, % :`} value={positiveFeedback}/>
-              </>)}
+            : ( <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              percent={this.countPositiveFeedback()}
+            />)}
+              </Section>
       </div>
     )
   }
 }  
+
+export default styles;

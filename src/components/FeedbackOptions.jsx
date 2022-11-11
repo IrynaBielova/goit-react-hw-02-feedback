@@ -10,20 +10,7 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
                 name={name}
                 onClick= {() => onLeaveFeedback(name)}
 
-                type="button"    
-                style={{
-                    width: "72px",
-                    margin: "7px",
-                    textAlign: "center",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    cursor: "pointer",
-                    border: "none",
-                    borderRadius: "4px",
-                    boxShadow: "0px 0px 5px 2px rgba(174,183,227,1)",
-                    
-                }}
-              >
+                type="button">
                 {name}
               </button>
             );
